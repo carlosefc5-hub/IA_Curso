@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Inteligencia Artificial | Top Learning</title>
+    <meta name="description" content="Transforma tu trabajo con IA en 14 semanas. Aprende ChatGPT, Agentes Virtuales y Automatización.">
+    
+    <!-- Fuentes Google: Outfit para un look moderno y tech -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Iconos: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Librería de Animaciones al Scroll (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#0a0f1c',      
+                        brandOrange: '#ff6b00', 
+                        brandCyan: '#00f2ff',   
+                        textGray: '#94a3b8'     
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0a0f1c; color: white; overflow-x: hidden; }
+        
+        /* Efecto Cristal (Glassmorphism) */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Cursor parpadeante para el efecto de escritura */
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0a0f1c; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f97316; }
+
+        /* Fondo de rejilla animado */
+        .grid-bg {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        /* Utilidad para el gradiente de texto */
+        /* Agregamos la propiedad estándar `background-clip` y una regresión de color
+           para asegurar compatibilidad en navegadores que no implementan el prefijo. */
+        .text-gradient {
+            background: linear-gradient(to right, #ff6b00, #fbbf24);
+            background-clip: text; /* Propiedad estándar */
+            -webkit-background-clip: text; /* WebKit/Blink prefijo para compatibilidad */
+            -webkit-text-fill-color: transparent; /* WebKit/Blink: hace el texto transparente para ver el fondo */
+            color: transparent; /* Fallback: en casos donde no se soporte text-fill */
+        }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-brandOrange selection:text-white">
+
+    <!-- 1. HERO SECTION (Ahora con animación y blobs) -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-10">
+        <!-- Fondos animados (Blobs) -->
+        <div class="absolute top-0 left-0 w-full h-full grid-bg z-0 pointer-events-none"></div>
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-brandOrange rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-brandCyan rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-4000"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center px-4 space-y-8" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 animate-float">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]"></span>
+                <span class="text-sm font-semibold text-brandCyan tracking-wide uppercase">Inscripciones Abiertas 2025</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
+                Transforma tu futuro con <br>
+                <span id="typewriter" class="text-gradient"></span><span class="cursor-blink text-brandOrange">|</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
+                Deja de perder tiempo en tareas manuales. Construye <strong class="text-brandCyan font-semibold">Agentes Virtuales</strong> y automatiza tu negocio en solo 14 semanas.
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-8">
+                <a href="https://wa.me/5213314559706?text=Hola,%20estoy%20listo%20para%20comenzar%20mi%20curso%20y%20quiero%20conocer%20la%20promoción." 
+                   target="_blank"
+                   class="group relative px-8 py-4 bg-brandOrange hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] flex items-center gap-3 overflow-hidden transform hover:-translate-y-1">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span class="relative text-lg">¡Quiero apartar mi lugar!</span>
+                </a>
+            </div>
+            
+            <div class="pt-8 text-sm text-gray-500 flex justify-center gap-8 font-medium">
+                <span class="flex items-center gap-2"><i class="fas fa-check text-brandCyan"></i> 100% En Vivo</span>
+                <span class="flex items-center gap-2"><i class="fas fa-check text-brandCyan"></i> Desde Cero</span>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 animate-bounce text-gray-600">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- 2. PLAN DE ESTUDIOS (Con efecto aparecer al scroll) -->
+    <section class="py-24 px-4 bg-bgDark relative overflow-hidden" id="temario">
+        <!-- Decoración lateral -->
+        <div class="absolute top-1/2 right-0 w-96 h-96 bg-brandCyan/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Tu Ruta de <span class="text-brandCyan">Aprendizaje</span></h2>
+                <p class="text-gray-400 text-lg">Un paso a paso diseñado estratégicamente para llevarte de 0 a Experto.</p>
+            </div>
+            
+            <div class="space-y-8 relative">
+                <!-- Línea conectora vertical para desktop -->
+                <div class="hidden md:block absolute left-[23px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-brandOrange via-gray-800 to-gray-800 z-0"></div>
+
+                <!-- Modulo 1 -->
+                <div class="group relative flex gap-6 md:gap-10" data-aos="fade-right">
+                    <div class="flex flex-col items-center relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-bgDark border-2 border-brandOrange text-brandOrange flex items-center justify-center font-bold text-lg shadow-[0_0_15px_rgba(255,107,0,0.3)]">01</div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl border-l-4 border-l-brandOrange w-full hover:translate-x-2 transition-transform duration-300">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold text-white">Fundamentos & Prompt Engineering</h3>
+                            <span class="text-xs font-bold text-brandOrange bg-brandOrange/10 px-3 py-1 rounded-full border border-brandOrange/20">SEMANAS 1-2</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">Domina la comunicación con la IA. Aprende a usar <strong>ChatGPT, Claude y Gemini</strong> como un profesional para obtener resultados precisos y evitar alucinaciones.</p>
+                    </div>
+                </div>
+
+                <!-- Modulo 2 -->
+                <div class="group relative flex gap-6 md:gap-10" data-aos="fade-right" data-aos-delay="100">
+                    <div class="flex flex-col items-center relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-bgDark border-2 border-gray-700 group-hover:border-brandCyan text-gray-500 group-hover:text-brandCyan flex items-center justify-center font-bold text-lg transition-colors">02</div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl border-l-4 border-l-gray-700 group-hover:border-l-brandCyan w-full hover:translate-x-2 transition-transform duration-300 group-hover:shadow-[0_4px_30px_rgba(6,182,212,0.1)]">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-brandCyan transition-colors">Creación Audiovisual IA</h3>
+                            <span class="text-xs font-bold text-gray-400 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">SEMANAS 3-5</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">Conviértete en una agencia creativa de una sola persona. Genera imágenes, clona voces y crea videos sintéticos con herramientas de vanguardia.</p>
+                    </div>
+                </div>
+
+                <!-- Modulo 3 -->
+                <div class="group relative flex gap-6 md:gap-10" data-aos="fade-right" data-aos-delay="200">
+                    <div class="flex flex-col items-center relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-bgDark border-2 border-gray-700 group-hover:border-brandCyan text-gray-500 group-hover:text-brandCyan flex items-center justify-center font-bold text-lg transition-colors">03</div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl border-l-4 border-l-gray-700 group-hover:border-l-brandCyan w-full hover:translate-x-2 transition-transform duration-300 group-hover:shadow-[0_4px_30px_rgba(6,182,212,0.1)]">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-brandCyan transition-colors">Automatización (No-Code)</h3>
+                            <span class="text-xs font-bold text-gray-400 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">SEMANAS 6-8</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">Olvídate de las tareas repetitivas. Conecta tus aplicaciones favoritas usando <strong>Make</strong> y crea flujos de trabajo que funcionan mientras duermes.</p>
+                    </div>
+                </div>
+
+                <!-- Modulo 4 -->
+                <div class="group relative flex gap-6 md:gap-10" data-aos="fade-right" data-aos-delay="300">
+                    <div class="flex flex-col items-center relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-bgDark border-2 border-gray-700 group-hover:border-brandCyan text-gray-500 group-hover:text-brandCyan flex items-center justify-center font-bold text-lg transition-colors">04</div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl border-l-4 border-l-gray-700 group-hover:border-l-brandCyan w-full hover:translate-x-2 transition-transform duration-300 group-hover:shadow-[0_4px_30px_rgba(6,182,212,0.1)]">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-brandCyan transition-colors">Agentes Inteligentes</h3>
+                            <span class="text-xs font-bold text-gray-400 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">SEMANAS 9-12</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">El núcleo del curso. Aprende a configurar empleados virtuales con <strong>Botpress</strong> que atienden clientes, califican leads y agendan citas 24/7.</p>
+                    </div>
+                </div>
+
+                <!-- Modulo 5 -->
+                <div class="group relative flex gap-6 md:gap-10" data-aos="fade-right" data-aos-delay="400">
+                    <div class="flex flex-col items-center relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-bgDark border-2 border-gray-700 group-hover:border-brandCyan text-gray-500 group-hover:text-brandCyan flex items-center justify-center font-bold text-lg transition-colors">05</div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl border-l-4 border-l-gray-700 group-hover:border-l-brandCyan w-full hover:translate-x-2 transition-transform duration-300 group-hover:shadow-[0_4px_30px_rgba(6,182,212,0.1)]">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-brandCyan transition-colors">Estrategia & Datos</h3>
+                            <span class="text-xs font-bold text-gray-400 bg-gray-800 px-3 py-1 rounded-full border border-gray-700">SEMANAS 13-14</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">Toma decisiones basadas en datos, no en intuición. Construye Dashboards inteligentes que analizan tu negocio en tiempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TESTIMONIOS (Diseño Grid Dinámico) -->
+    <section class="py-24 px-4 bg-[#050810] relative">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-down">Resultados <span class="text-brandOrange">Reales</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-3xl relative group hover:bg-white/5 transition-all duration-300 border-t-4 border-t-transparent hover:border-t-purple-500" data-aos="flip-left">
+                    <div class="absolute -top-6 left-8 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl shadow-lg rotate-3 group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="mt-8 mb-6">
+                        <i class="fas fa-quote-left text-gray-600 text-xl mb-2"></i>
+                        <p class="text-gray-300 italic">"Antes tardaba días diseñando. Con lo que aprendí, automaticé mis campañas visuales y reduje mi carga operativa un 70%."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-800">
+                        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg">👩‍🎨</div>
+                        <div>
+                            <h4 class="font-bold text-white leading-tight">Sofía L.</h4>
+                            <p class="text-xs text-brandCyan">Freelancer Creativa</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-purple-500/10 text-purple-400 text-xs px-3 py-2 rounded-lg font-semibold">
+                        <i class="fas fa-trophy mr-1"></i> Logro: Sistema de Marketing Auto
+                    </div>
+                </div>
+
+                <!-- Card 2 (Destacada) -->
+                <div class="glass-card p-8 rounded-3xl relative group bg-gradient-to-b from-white/5 to-transparent border-t-4 border-t-brandOrange transform md:-translate-y-6 shadow-[0_10px_40px_rgba(0,0,0,0.3)]" data-aos="flip-left" data-aos-delay="200">
+                    <div class="absolute -top-6 left-8 w-12 h-12 bg-gradient-to-br from-brandOrange to-yellow-500 rounded-xl flex items-center justify-center text-white text-xl shadow-lg rotate-3 group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="mt-8 mb-6">
+                        <i class="fas fa-quote-left text-brandOrange/50 text-xl mb-2"></i>
+                        <p class="text-white font-medium text-lg">"Mi bot ahora cierra ventas mientras duermo. Es literalmente como tener un empleado extra que no cobra horas extra. ¡Brutal!"</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-700">
+                        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg">👨‍💼</div>
+                        <div>
+                            <h4 class="font-bold text-white leading-tight">Roberto G.</h4>
+                            <p class="text-xs text-brandOrange">Dueño de Negocio</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-brandOrange/10 text-brandOrange text-xs px-3 py-2 rounded-lg font-semibold">
+                        <i class="fas fa-trophy mr-1"></i> Logro: Ventas Automáticas 24/7
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-3xl relative group hover:bg-white/5 transition-all duration-300 border-t-4 border-t-transparent hover:border-t-brandCyan" data-aos="flip-left" data-aos-delay="400">
+                    <div class="absolute -top-6 left-8 w-12 h-12 bg-gradient-to-br from-brandCyan to-blue-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg rotate-3 group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="mt-8 mb-6">
+                        <i class="fas fa-quote-left text-gray-600 text-xl mb-2"></i>
+                        <p class="text-gray-300 italic">"Adiós al análisis manual. Ahora tomo decisiones con dashboards que se actualizan solos. Recuperé mis fines de semana."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-800">
+                        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg">📊</div>
+                        <div>
+                            <h4 class="font-bold text-white leading-tight">Carlos R.</h4>
+                            <p class="text-xs text-brandCyan">Gerente</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-brandCyan/10 text-brandCyan text-xs px-3 py-2 rounded-lg font-semibold">
+                        <i class="fas fa-trophy mr-1"></i> Logro: Dashboards Inteligentes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LOS 6 SISTEMAS (Grid Interactivo) -->
+    <section class="py-24 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-bgDark"></div>
+        <!-- Decoración de fondo -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brandOrange/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6" data-aos="zoom-in">Lo que te llevas a <span class="text-brandCyan">Casa</span></h2>
+            <p class="text-gray-400 mb-12 max-w-2xl mx-auto text-lg" data-aos="fade-up">No es solo teoría. Al terminar, tendrás estos 6 activos digitales instalados y funcionando en tu propio negocio.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Item System 1 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-brandOrange/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🚀</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">Pipeline Comercial</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Sistema completo de ventas automatizadas de principio a fin.</p>
+                </div>
+
+                <!-- Item System 2 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-brandCyan/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📢</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">Marketing Machine</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Generación de contenido automático y programado para redes.</p>
+                </div>
+
+                <!-- Item System 3 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-purple-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤖</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">Asistente 24/7</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Tu clon digital de soporte que responde al instante.</p>
+                </div>
+
+                <!-- Item System 4 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-green-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📊</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">Radar de Mercado</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Sistema de monitoreo de competencia en tiempo real.</p>
+                </div>
+
+                <!-- Item System 5 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-yellow-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤝</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">HR Hunter</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Filtrado de talento y análisis de CVs automático.</p>
+                </div>
+
+                <!-- Item System 6 -->
+                <div class="glass-card p-6 rounded-2xl hover:bg-red-500/10 hover:-translate-y-1 transition-all duration-300 cursor-default group text-left" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-12 h-12 bg-bgDark rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">❤️</div>
+                        <h3 class="font-bold text-white text-lg leading-tight">Fidelización Auto</h3>
+                    </div>
+                    <p class="text-sm text-gray-400 pl-16">Sistema de retención de clientes automatizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. DESCARGA TEMARIO -->
+    <section class="py-16 bg-gradient-to-r from-brandOrange to-orange-600 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10" data-aos="zoom-in">
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-8">¿Quieres ver el detalle técnico clase por clase?</h3>
+            <a href="https://drive.google.com/file/d/1NBlmy1Okqc5JpbIUYbqexyZb4n3F9YYB/view?usp=sharing" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brandOrange font-bold rounded-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:scale-105 transition-all text-lg">
+                <i class="fas fa-file-download text-xl"></i> Descargar Temario Completo (PDF)
+            </a>
+            <p class="text-white/80 text-sm mt-4">Sin registro previo. Acceso directo.</p>
+        </div>
+    </section>
+
+    <!-- 6. INSTRUCTOR -->
+    <section class="py-24 px-4 bg-bgDark">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card p-8 md:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-12 border border-gray-700/50" data-aos="fade-up">
+                <div class="relative w-56 h-56 flex-shrink-0">
+                    <div class="absolute inset-0 bg-brandCyan/30 rounded-full blur-2xl animate-pulse"></div>
+                    <div class="relative w-full h-full bg-gray-800 rounded-full overflow-hidden border-4 border-brandCyan/20 flex items-center justify-center">
+                         <!-- Placeholder de Foto con Icono -->
+                         <i class="fas fa-user-astronaut text-7xl text-gray-600"></i>
+                    </div>
+                </div>
+                <div class="text-center md:text-left flex-1">
+                    <div class="inline-block px-4 py-1 bg-brandCyan/10 text-brandCyan text-xs font-bold rounded-full mb-4 border border-brandCyan/20 tracking-wider">INSTRUCTOR LÍDER</div>
+                    <h2 class="text-4xl font-bold text-white mb-4">Alex Pérez</h2>
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">Cofundador de Top Learning y Director de Tecnología. Ingeniero en Ciencia de Datos con <strong class="text-white">10+ años de experiencia</strong> transformando empresas reales a través de la Inteligencia Artificial.</p>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                        <span class="px-3 py-1 bg-white/5 rounded-lg text-sm text-gray-400 border border-white/10 hover:border-brandOrange transition-colors">Data Science</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-lg text-sm text-gray-400 border border-white/10 hover:border-brandOrange transition-colors">Machine Learning</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-lg text-sm text-gray-400 border border-white/10 hover:border-brandOrange transition-colors">Business Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ (Acordeón Animado) -->
+    <section class="py-24 px-4 bg-[#050810]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-down">Preguntas <span class="text-brandOrange">Frecuentes</span></h2>
+            
+            <div class="space-y-4">
+                <!-- Pregunta 1 -->
+                <details class="group glass-card rounded-xl overflow-hidden cursor-pointer" data-aos="fade-up">
+                    <summary class="flex justify-between items-center p-6 font-semibold text-lg list-none group-hover:text-brandCyan transition-colors">
+                        <span>¿Necesito saber programar?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brandOrange"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4">
+                        Para nada. El curso está diseñado con enfoque <strong>No-Code</strong>. Usarás herramientas visuales e intuitivas. Lo importante es tu lógica y creatividad, no escribir código complejo.
+                    </div>
+                </details>
+                <!-- Pregunta 2 -->
+                <details class="group glass-card rounded-xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <summary class="flex justify-between items-center p-6 font-semibold text-lg list-none group-hover:text-brandCyan transition-colors">
+                        <span>¿Cuáles son los horarios de clase?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brandOrange"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4">
+                        Tenemos opciones flexibles diseñadas para profesionales: sesiones entre semana (noches) o fines de semana intensivos. Todo queda grabado por si faltas.
+                    </div>
+                </details>
+                <!-- Pregunta 3 -->
+                <details class="group glass-card rounded-xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="flex justify-between items-center p-6 font-semibold text-lg list-none group-hover:text-brandCyan transition-colors">
+                        <span>¿Estaré solo durante el aprendizaje?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brandOrange"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4">
+                        No. Tienes un <strong>guía experto</strong> y un <strong>tutor de acompañamiento</strong> durante todo el proceso para resolver dudas técnicas y estratégicas.
+                    </div>
+                </details>
+                <!-- Pregunta 4 -->
+                <details class="group glass-card rounded-xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <summary class="flex justify-between items-center p-6 font-semibold text-lg list-none group-hover:text-brandCyan transition-colors">
+                        <span>¿Obtengo certificado?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brandOrange"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-400 leading-relaxed border-t border-gray-700/50 pt-4">
+                        Sí, recibes un Diploma Curricular de Top Learning. Además, te preparamos para certificaciones oficiales opcionales ante STPS y RED CONOCER.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="bg-bgDark pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="text-2xl font-bold text-white mb-2 tracking-tight">Top Learning</h4>
+                <p class="text-gray-500 text-sm">Empoderando el futuro con Inteligencia Artificial.</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://instagram.com/toplearningoficial" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-tr hover:from-yellow-500 hover:via-purple-500 hover:to-blue-500 hover:text-white transition-all text-gray-400 text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-gray-400 text-xl"><i class="fab fa-facebook-f"></i></a>
+            </div>
+
+            <div class="text-right text-xs text-gray-500">
+                <p class="mb-2">Avalado por:</p>
+                <div class="flex gap-3 font-bold text-gray-400 items-center bg-white/5 px-4 py-2 rounded-lg border border-white/5">
+                    <span>STPS</span> <span class="text-gray-700">|</span> <span>IDEFT</span> <span class="text-gray-700">|</span> <span>CONOCER</span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-700 text-xs mt-12 border-t border-gray-800 pt-8">
+            &copy; 2025 Top Learning. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- STICKY BUTTON -->
+    <a href="https://wa.me/5213314559706?text=Hola,%20me%20gustaría%20conocer%20más%20detalles%20sobre%20el%20Curso%20de%20IA..." 
+       target="_blank"
+       class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-[0_0_30px_rgba(37,211,102,0.4)] hover:scale-105 transition-transform animate-float group hover:bg-[#20bd5a]">
+        <div class="flex flex-col items-start hidden md:block mr-1">
+            <span class="text-[10px] uppercase font-bold text-green-100 leading-none">¿Tienes dudas?</span>
+            <span class="font-bold text-sm leading-tight">Habla con un Asesor</span>
+        </div>
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts de Animación -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Iniciar animaciones al scroll
+        AOS.init({
+            once: true, // La animación solo pasa una vez
+            offset: 50, // Empieza antes de llegar al elemento
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Script de Máquina de Escribir (Typewriter)
+        const words = ["Inteligencia Artificial", "Automatización", "Agentes Virtuales", "ChatGPT"];
+        let i = 0;
+
+        function typeWriter() {
+            const heading = document.getElementById("typewriter");
+            const word = words[i];
+            let n = 0;
+            
+            // Borrar
+            heading.innerHTML = "";
+            
+            // Escribir letra por letra
+            const interval = setInterval(() => {
+                heading.innerHTML += word.charAt(n);
+                n++;
+                if (n >= word.length) {
+                    clearInterval(interval);
+                    // Esperar y cambiar palabra
+                    setTimeout(() => {
+                        i = (i + 1) % words.length;
+                        typeWriter();
+                    }, 2000);
+                }
+            }, 100);
+        }
+
+        // Iniciar efecto al cargar
+        document.addEventListener('DOMContentLoaded', typeWriter);
+    </script>
+</body>
+</html>
